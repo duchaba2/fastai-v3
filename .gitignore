@@ -1,1 +1,6 @@
 app/export.pkl
+/.settings/
+/.dockerignore
+/.gitignore
+/.project
+/.pydevproject
