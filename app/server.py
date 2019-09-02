@@ -10,9 +10,9 @@ from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
 
 export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
-export_file_name = 'export.pkl'
+export_file_name = 'farm-animals_NkUj.pkl'
 
-classes = ['black', 'grizzly', 'teddys']
+classes = ['cat', 'cattle', 'chicken', 'dog', 'donkey', 'duck', 'goat', 'goose', 'horse', 'pig', 'rabbit', 'sheep', 'turkey']
 path = Path(__file__).parent
 
 app = Starlette()
@@ -30,9 +30,10 @@ async def download_file(url, dest):
 
 
 async def setup_learner():
-    await download_file(export_file_url, path / export_file_name)
+    #await download_file(export_file_url, path / export_file_name)
+    path2 = path.joinpath("models")
     try:
-        learn = load_learner(path, export_file_name)
+        learn = load_learner(path2, export_file_name)
         return learn
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
@@ -54,7 +55,11 @@ async def homepage(request):
     html_file = path / 'view' / 'index.html'
     return HTMLResponse(html_file.open().read())
 
-
+@app.route('/original')
+async def homepage(request):
+    html_file = path / 'view' / 'old-index.html'
+    return HTMLResponse(html_file.open().read())
+   
 @app.route('/analyze', methods=['POST'])
 async def analyze(request):
     img_data = await request.form()
@@ -63,7 +68,7 @@ async def analyze(request):
     prediction = learn.predict(img)[0]
     return JSONResponse({'result': str(prediction)})
 
-
+# localhost: 127.0.0.1
 if __name__ == '__main__':
     if 'serve' in sys.argv:
-        uvicorn.run(app=app, host='0.0.0.0', port=5000, log_level="info")
+        uvicorn.run(app=app, host='127.0.0.1', port=5000, log_level="info")

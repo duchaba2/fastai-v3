@@ -1,0 +1,31 @@
+.icard {
+ margin: 1rem 10%;
+}
+.no-overflow {
+ overflow: hidden;
+}
+.target-img-parent {
+ 
+}
+
+.target-img {
+/* width: 100%; */
+ min-height: 10rem;
+ background-size: contain;
+ background-repeat: no-repeat;
+ background-position: center;
+}
+
+/* Bootstrap Toggle v2.2.2 corrections for Bootsrtap 4*/
+.toggle-off {
+ box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.toggle.off {
+ border-color: rgba(0, 0, 0, .25);
+}
+
+.toggle-handle {
+ background-color: white;
+ border: thin rgba(0, 0, 0, .25) solid;
+}

@@ -1,41 +1,92 @@
-<html lang='en'>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset='utf-8'>
-  <link rel='stylesheet' href='../static/style.css'>
-  <script src='../static/client.js'></script>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/solar/bootstrap.min.css" rel="stylesheet"
+ integrity="sha384-8nq3OiMMgrVFAHyRMMO+DTfMEciSY+c3Awhj/5ljQ1xck1Uv2BUtMjsjLD8GT5Er" crossorigin="anonymous">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="static/index.css" />
+<title>Fast.ai - Monty - Farm Animals - Duc Haba</title>
 </head>
 <body>
-<div>
-  <div class='center'>
-    <div class='title'>Classify Bear Images 🐻</div>
-    <p>
-      Use images of <strong>teddy</strong> bears, <strong>black</strong> bears, <strong>grizzly</strong> bears, or
-      all three!
-    </p>
-    <div class='content'>
-      <div class='no-display'>
-        <input id='file-input'
-               class='no-display'
-               type='file'
-               name='file'
-               accept='image/*'
-               onchange='showPicked(this)'>
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md icard-1">
+    <div class="card text-white bg-primary mb-3 icard">
+     <div class="card-header lead">What is the farm animal?</div>
+     <div class="card-body">
+      <small>Name: Monty, Birth day: March 6, 2019 Father: Duc Haba, Accuracy, reported: verified:
+       Public Vote:</small>
+     </div>
+     <div class="target-img-parent card-footer">
+      <div class="target-img rounded border border-light card-1-target-img" style=""></div>
+     </div>
+     <div class="card-body">
+
+      <div class="input-group">
+       <div class="custom-file">
+        <form id="card-1-form" method="post" action="/analyze">
+        <input type="file" 
+         accept="image/gif, image/jpeg, image/png" name="file"
+         class="custom-file-input" id="card-1-upload" />
+         <input type="text" value="cat" name="fname" />
+         </form> <label class="custom-file-label no-overflow"
+         for="card-1-upload" id="card-1-filename"><i class="fa fa-paw"></i> Choose file</label>
+       </div>
+       <div class="input-group-append">
+        <button class="btn btn-danger disabled" type="button" id="card-1-check-it"><i class="fas fa-jedi"></i> Check It</button>
+       </div>
       </div>
-      <button class='choose-file-button' type='button' onclick='showPicker()'>Select Image</button>
-      <div class='upload-label'>
-        <label id='upload-label'>No file chosen</label>
+
+     </div>
+     <!--  -->
+     <div class="card-footer">
+      <div class="card-title">
+       The answer is: <span class="answer h3" id="card-1-answer">?</span>
       </div>
-      <div>
-        <img id='image-picked' class='no-display' alt='Chosen Image' height='200'>
-      </div>
-      <div class='analyze'>
-        <button id='analyze-button' class='analyze-button' type='button' onclick='analyze()'>Analyze</button>
-      </div>
-      <div class='result-label'>
-        <label id='result-label'></label>
-      </div>
+      
+     </div>
+     
+     <div class="card-body">
+      <input type="checkbox" checked data-toggle="toggle" data-on="<i class='fa fa-play'></i> Play"
+       data-off="<i class='fa fa-pause'></i> Pause">
+     </div>
     </div>
+   </div>
+   <!--  -->
+   <div class="col-md">
+    <div class="card text-white bg-success mb-3 icard">
+     <div class="card-header">Header</div>
+     <div class="card-body">
+      <h4 class="card-title">Success card title</h4>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+       card's content.</p>
+     </div>
+    </div>
+   </div>
   </div>
-</div>
+ </div>
+ <!-- orginal -->
+ <div>
+  <a href="/original" target="_blank">Original</a>
+ </div>
+ <!-- add javascripts -->
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+ <!-- then custom js -->
+ <script src='../static/index.js'></script>
+
 </body>
 </html>
