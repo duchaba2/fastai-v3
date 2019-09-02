@@ -1,29 +1,10 @@
-(function($) {
-  $.fn.serializeFiles = function() {
-    var form = $(this),
-        formData = new FormData(),
-        formParams = form.serializeArray();
-
-    $.each(form.find('input[type="file"]'), function(i, tag) {
-      $.each($(tag)[0].files, function(i, file) {
-        formData.append(tag.name, file);
-      });
-    });
-
-    $.each(formParams, function(i, val) {
-      formData.append(val.name, val.value);
-    });
-
-    return formData;
-  };
-})(jQuery);
 function readURL(input) {
 
   if (input.files && input.files[0]) {
     var reader = new FileReader();
 
     reader.onload = function(e) {
-      var target = $('.card-1-target-img');
+      var target = $('#card-1-target-img');
       var img = "url('" + e.target.result + "')";
       target.css("background-image", img);
     }
@@ -31,6 +12,9 @@ function readURL(input) {
     reader.readAsDataURL(input.files[0]);
   }
 }
+$("#card-1-target-img").on("click", function(){
+  $("#card-1-upload").trigger("click");
+});
 //
 $("#card-1-upload").on("change", function() {
   var fileName = $(this)[0].files[0].name;
@@ -38,6 +22,7 @@ $("#card-1-upload").on("change", function() {
   label.html(fileName);
   readURL(this);
   var check = $("#card-1-check-it").removeClass("disabled");
+  
 });
 //
 $("#card-1-check-it").on("click", function(){
@@ -62,7 +47,9 @@ $("#card-1-check-it").on("click", function(){
       // process success data
       success: function(pdata, pstatus, pxhr) {
         var answer = $("#card-1-answer");
-        answer.html(pdata.result);
+        p = " @" + Math.round(parseFloat(pdata.percent) * 100) + "%";
+        s = pdata.result + p;
+        answer.html(s);
         
       }
     });
