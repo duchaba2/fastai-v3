@@ -33,7 +33,7 @@ $("#card-1-check-it").on("click", function(){
     answer.html('<i class="fas fa-yin-yang fa-spin"></i>');
     
     // post the data to /analyze
-    var myUrl = "http://localhost:5000/analyze";
+    var myUrl = "/analyze";
     var myData = new FormData($("#card-1-form")[0]); 
     me.addClass("disabled");
     upload.attr("disabled", "disabled");
