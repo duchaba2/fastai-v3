@@ -17,16 +17,13 @@
  <div class="container-fluid">
   <div class="row">
    <div class="col-md icard-1">
-    <div class="card text-white bg-primary mb-3 icard">
-     <div class="card-header lead">What is the farm animal?</div>
-     <div class="card-body">
-      <small>Name: Monty, Birth day: March 6, 2019 Father: Duc Haba, Accuracy, reported: verified:
-       Public Vote:</small>
+    <div class="card text-white bg-info mb-3 icard">
+     <div class="card-header lead"><i class="fas fa-robot target-answer"></i> What is the farm animal?</div>
+
+     <div class="target-img-parent card-body">
+      <div id="card-1-target-img" class="target-img rounded" style=""></div>
      </div>
-     <div class="target-img-parent card-footer">
-      <div id="card-1-target-img" class="target-img rounded border border-light" style=""></div>
-     </div>
-     <div class="card-body">
+     <div class="card-footer">
       <!-- farm-animals_NkUj.pkl , pets_A9032.pkl -->
       <div class="input-group">
        <div class="custom-file">
@@ -38,19 +35,21 @@
          class="fa fa-paw"></i> Choose file</label>
        </div>
        <div class="input-group-append">
-        <button class="btn btn-danger disabled" type="button" id="card-1-check-it">
-         <i class="fas fa-jedi"></i> Check It
+        <button class="btn btn-warning disabled" type="button" id="card-1-check-it">
+         <i class="fab fa-odnoklassniki"></i> Check It
         </button>
        </div>
       </div>
-
      </div>
+
      <!--  -->
-     <div class="card-footer">
-      <div class="card-title">
-       The answer is: <span class="answer h3" id="card-1-answer">?</span>
+     <div class="card-body">
+      <div class="card-title text-center">
+       <span><small>The answer is:</small></span> <span class="answer h3 target-answer" id="card-1-answer">?</span>
       </div>
      </div>
+
+     <!--  -->
 
     </div>
    </div>

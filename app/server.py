@@ -8,9 +8,12 @@ from starlette.applications import Starlette
 from starlette.middleware.cors import CORSMiddleware
 from starlette.responses import HTMLResponse, JSONResponse
 from starlette.staticfiles import StaticFiles
-
+#
+#try:
+#    x_model_name = sys.argv[2]
+#except IndexError:
+#    x_model_name = 'farm-animals_NkUj.pkl'
 #export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
-#x_model_name = 'farm-animals_NkUj.pkl'
 x_model_name = 'pets_A9032.pkl'
 learn = None
 classes = None
@@ -73,7 +76,8 @@ async def analyze(request):
     img_bytes = await (img_data['file'].read())
     img = open_image(BytesIO(img_bytes))
     prediction, z,w = learn.predict(img)
-    return JSONResponse({'result': str(prediction), 'percent' : str(float(w[z])), "classes": str(learn.data.classes), "model_name": model_name})
+    return JSONResponse({'result': str(prediction), 'percent' : str(float(w[z])), 
+			"classes": str(learn.data.classes), "model_name": model_name, "argv": str(sys.argv)})
 
 # localhost: 127.0.0.1
 if __name__ == '__main__':
