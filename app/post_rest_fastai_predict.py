@@ -74,7 +74,7 @@ g_data.update({"model_name": g_form.getvalue("model_name")})
 #
 g_data.update({"elapse1_load_time_sec": get_etime()})
 g_learner = setup_learner("farm-animals_NkUj.pkl")
-g_data.update({"elpase2_load_model_time_sec": get_etime()})
+g_data.update({"elapse2_load_model_time_sec": get_etime()})
 g_data.update({"model_classes": g_learner.data.classes})
 #
 #
