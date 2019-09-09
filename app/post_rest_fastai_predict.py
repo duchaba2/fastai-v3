@@ -9,12 +9,14 @@ import os
 import torch
 import psutil
 import cgi
+import pathlib
 #
 import fastai
 #from fastai import *
 from fastai.vision import *
 from io import BytesIO
 #
+g_form = cgi.FieldStorage()
 g_data = {}
 #
 #
@@ -24,20 +26,6 @@ def get_etime():
 	etime = time.time() - g_start_time 
 	g_start_time = time.time()
 	return etime
-#
-def setup_learner(model_name):
-  #model_name = "farm-animals_NkUj.pkl"
-	path = Path(__file__).parent
-	model_path = path.joinpath("models")
-	try:
-		learner = load_learner(model_path, model_name)
-		return learner
-	except RuntimeError as e:
-		if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
-			message = "This model was trained with an old version of fastai"
-			raise RuntimeError(message)
-		else:
-			raise RuntimeError("Could not load leaner")
 #
 def get_sys_info():
 	data = {}
@@ -66,24 +54,43 @@ def get_sys_info():
 	data.update({"current_path":str(os.path.abspath("."))})
 	return data
 #
+def get_learner():
+	global g_data, g_form
+	global g_form
+	learner = None
+	try:
+		#model_name = "farm-animals_NkUj.pkl"
+		path = pathlib.Path(__file__).parent
+		model_path = path.joinpath("models")
+		g_data.update({"model_path": str(model_path)})
+		model_name = str(g_form.getvalue("model_name"))
+		g_data.update({"model_name": model_name})
+		learner = load_learner(model_path, model_name)
+	except Exception as e:
+		g_data.update({"*exception_get_learner": str(e)})
+	#
+	return learner
 #
+def predict_image():
+	global g_data
+	global g_form
+	g_data.update(get_sys_info())
+	g_data.update({"elapse1_load_time_sec": get_etime()})
+	learner = get_learner()
+	try:
+		if (None != learner):
+			g_data.update({"elapse2_load_model_time_sec": get_etime()})
+			g_data.update({"model_classes": learner.data.classes})
+			img = open_image(BytesIO(g_form.getvalue("image_file")))
+			p,i,a = learner.predict(img)
+			g_data.update({'predict': str(p), 'percent' : str(float(a[i]))})
+			g_data.update({"elapse3_predict_time_sec": get_etime()})
+	except Exception as e:
+		g_data.update({"*exception_predict_image": str(e)})
+	#
+	print(json.dumps(g_data), end="")
+	return
 #
-g_form = cgi.FieldStorage()
-g_data.update({"model_name": g_form.getvalue("model_name")})
-#
-#
-g_data.update({"elapse1_load_time_sec": get_etime()})
-g_learner = setup_learner("farm-animals_NkUj.pkl")
-g_data.update({"elapse2_load_model_time_sec": get_etime()})
-g_data.update({"model_classes": g_learner.data.classes})
-#
-#
-g_img = open_image(BytesIO(g_form.getvalue("file")))
-p,i,a = g_learner.predict(g_img)
-g_data.update({'result': str(p), 'percent' : str(float(a[i]))})
-#
-#
-g_data.update(get_sys_info())
-g_data.update({"elapse3_predict_time_sec": get_etime()})
-print(json.dumps(g_data), end="")
+# 
+predict_image()
 #

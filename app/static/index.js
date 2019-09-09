@@ -51,9 +51,9 @@ $("#card-1-check-it").on("click", function(){
       //
       success: function(pdata, pstatus, pxhr) {
         var answer = $("#card-1-answer");
-        if ((pdata.hasOwnProperty("result")) && (pdata.hasOwnProperty("percent"))) {
+        if ((pdata.hasOwnProperty("predict")) && (pdata.hasOwnProperty("percent"))) {
           p = " @" + Math.round(parseFloat(pdata.percent) * 100) + "%";
-          s = pdata.result + p;
+          s = pdata.predict + p;
         }
         else {
           s = "No result";
